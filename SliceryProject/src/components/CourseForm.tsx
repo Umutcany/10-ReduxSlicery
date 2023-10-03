@@ -5,7 +5,9 @@ import {
   changeName,
   formReducer,
 } from "../slices/formSlice";
+
 import { useDispatch } from "react-redux/es/exports";
+import { addCourse } from "../slices/CourseSlice";
 
 type RootStateType = {
   form: ReturnType<typeof formReducer>;
@@ -22,7 +24,16 @@ const CourseForm = () => {
     };
   });
 
-  console.log(name, description, cost);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(
+      addCourse({
+        name,
+        description,
+        cost,
+      })
+    );
+  };
 
   return (
     <div className="courseForm panel">
@@ -62,7 +73,9 @@ const CourseForm = () => {
           </div>
         </div>
         <div className="field">
-          <button className="button is-primary">Kaydet</button>
+          <button onClick={handleSubmit} className="button is-primary">
+            Kaydet
+          </button>
         </div>
       </form>
     </div>
