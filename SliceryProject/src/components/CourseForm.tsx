@@ -1,5 +1,11 @@
 import { useSelector } from "react-redux";
-import { formReducer } from "../slices/formSlice";
+import {
+  changeCost,
+  changeDescription,
+  changeName,
+  formReducer,
+} from "../slices/formSlice";
+import { useDispatch } from "react-redux/es/exports";
 
 type RootStateType = {
   form: ReturnType<typeof formReducer>;
@@ -7,6 +13,7 @@ type RootStateType = {
 };
 
 const CourseForm = () => {
+  const dispatch = useDispatch();
   const { name, description, cost } = useSelector((state: RootStateType) => {
     return {
       name: state.form.name,
@@ -15,6 +22,8 @@ const CourseForm = () => {
     };
   });
 
+  console.log(name, description, cost);
+
   return (
     <div className="courseForm panel">
       <h4 className="subtitle is-3">Kurs Ekle</h4>
@@ -22,15 +31,34 @@ const CourseForm = () => {
         <div className="field-group">
           <div className="field">
             <label className="label">Ad</label>
-            <input className="input is-expanded" />
+            <input
+              onChange={(e) => {
+                dispatch(changeName(e.target.value));
+              }}
+              className="input is-expanded"
+              value={name}
+            />
           </div>
           <div className="field">
             <label className="label">Açıklama</label>
-            <textarea className="input is-expanded" />
+            <textarea
+              onChange={(e) => {
+                dispatch(changeDescription(e.target.value));
+              }}
+              className="input is-expanded"
+              value={description}
+            />
           </div>
           <div className="field">
             <label className="label">Fiyat</label>
-            <input type="number" className="input is-expanded" />
+            <input
+              onChange={(e) => {
+                dispatch(changeCost(parseInt(e.target.value)));
+              }}
+              type="number"
+              className="input is-expanded"
+              value={cost}
+            />
           </div>
         </div>
         <div className="field">
