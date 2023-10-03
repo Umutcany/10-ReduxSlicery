@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="container is-fluid">
       <CourseForm />
-      {/* <CourseSearch /> */}
+      <CourseSearch />
       <CourseList />
       {/* <CourseValue /> */}
     </div>
