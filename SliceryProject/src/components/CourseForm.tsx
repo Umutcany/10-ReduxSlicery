@@ -11,7 +11,6 @@ import { addCourse } from "../slices/CourseSlice";
 
 type RootStateType = {
   form: ReturnType<typeof formReducer>;
-  // Add other slices as needed
 };
 
 const CourseForm = () => {
